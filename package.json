@@ -1,0 +1,17 @@
+{
+  "name": "notion-sync",
+  "type": "module",
+  "version": "1.0.0",
+  "scripts": {
+    "format": "prettier --write ."
+  },
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "@notionhq/client": "^0.2.3",
+    "notionapi-agent": "^2.0.2"
+  },
+  "devDependencies": {
+    "prettier": "2.3.2"
+  }
+}
