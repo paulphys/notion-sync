@@ -7,6 +7,7 @@ Every x seconds:
     Delete page with older version and create new one with the new content
 */
 
+require('dotenv').config();
 import { Client } from "@notionhq/client";
 
 const user1 = new Client({ auth: process.env.USER1_TOKEN });

@@ -9,7 +9,7 @@
   "main": "index.js",
   "dependencies": {
     "@notionhq/client": "^0.2.3",
-    "notionapi-agent": "^2.0.2"
+    "dotenv": "^10.0.0"
   },
   "devDependencies": {
     "prettier": "2.3.2"
