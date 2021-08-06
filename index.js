@@ -7,18 +7,18 @@ Every x seconds:
     Delete page with older version and create new one with the new content
 */
 
-require('dotenv').config();
+import dotenv from "dotenv";
 import { Client } from "@notionhq/client";
+dotenv.config();
 
 const user1 = new Client({ auth: process.env.USER1_TOKEN });
 const user2 = new Client({ auth: process.env.USER2_TOKEN });
 
+const databaseID_1 = process.env.DATABASE_ID1;
+const databaseID_2 = process.env.DATABASE_ID2;
 
-const databaseID_1 = ""; 
-const databaseID_2 = ""; 
-
-const pageID_1 = ""; // needs to be dynamic!
-const pageID_2 = "";
+const pageID_1 = process.env.PAGE_ID1;
+const pageID_2 = process.env.PAGE_ID2;
 
 async function getPageContent(user, pageID) {
   const response = await user.pages.retrieve({ page_id: pageID });
@@ -37,7 +37,7 @@ async function searchAllPages(user) {
 }
 
 const searchedPages = await searchAllPages(user1);
-console.log(searchedPages)
+console.log(searchedPages);
 
 async function getBlocks(user, pageID) {
   const response = await user.blocks.children.list({
@@ -50,8 +50,6 @@ async function getBlocks(user, pageID) {
 const currentBlocks_1 = await getBlocks(user1, pageID_1);
 // const currentBlocks_2 = await getBlocks(user2,pageID_2)
 
-// console.log(currentBlocks_1);
-
 var blocksasArray = [];
 blocksasArray.push(currentBlocks_1);
 const blockArray = blocksasArray[0];
@@ -59,10 +57,6 @@ const newArray = blockArray.map(
   ({ id, created_time, last_edited_time, ...item }) => item
 );
 console.log(newArray);
-
-function compareWorkspaceVersion(currentBlocks_1, currentBlocks_2) {
-  return null;
-}
 
 async function createPage(user, parentID, newArray) {
   const response = await user.pages.create({
@@ -84,3 +78,7 @@ async function createPage(user, parentID, newArray) {
 const createdPage = await createPage(user1, pageID_1, newArray);
 
 console.log(createdPage);
+
+function compareWorkspaceVersion(currentBlocks_1, currentBlocks_2) {
+  return null;
+}
